@@ -13,3 +13,8 @@ deploy_key.pub
 
 # Pycharm
 .idea
+
+# VIM
+*~
+*.un~
+*.swp
