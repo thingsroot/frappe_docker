@@ -104,5 +104,5 @@ if [ "$1" = 'start' ]; then
 	  source /etc/default/supervisor
   fi
 
-  su /usr/bin/supervisord -c /etc/supervisord.conf
+  supervisord -c /etc/supervisor/supervisord.conf
 fi
