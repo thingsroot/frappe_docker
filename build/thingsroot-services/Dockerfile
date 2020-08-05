@@ -20,7 +20,7 @@ RUN git clone --depth 1 -o upstream https://github.com/symgrid/iot_mqtt_clients 
     && pip3 install --no-cache-dir -r iot_mqtt_clients/requirements.txt \
 	&& ln -s /home/frappe/services/iot_mqtt_clients /usr/iot_mqtt_clients \
 	&& ln -s /home/frappe/services/iot_mqtt_clients/supervisor.conf /etc/supervisor/conf.d/iot_mqtt_clients.conf \
-	&& rm -f /home/frappe/services/iot_mqtt_clients/logs \
+	&& rm -rf /home/frappe/services/iot_mqtt_clients/logs \
 	&& ln -s /home/frappe/services/logs/iot_mqtt_clients /home/frappe/services/iot_mqtt_clients/logs \
 	&& rm -f /home/frappe/services/iot_mqtt_clients/config.ini
 
@@ -31,9 +31,9 @@ RUN git clone --depth 1 -o upstream https://github.com/symgrid/iot_cloud_apps --
 	&& mkdir -p /home/frappe/services/logs/iot_cloud_apps/iot/logs \
 	&& mkdir -p /home/frappe/services/logs/iot_cloud_apps/iot_bridge/logs \
 	&& mkdir -p /home/frappe/services/logs/iot_cloud_apps/iot_ws_api/logs \
-	&& rm -f /home/frappe/services/iot_cloud_apps/iot/logs \
-	&& rm -f /home/frappe/services/iot_cloud_apps/iot_bridge/logs \
-	&& rm -f /home/frappe/services/iot_cloud_apps/iot_ws_api/logs \
+	&& rm -rf /home/frappe/services/iot_cloud_apps/iot/logs \
+	&& rm -rf /home/frappe/services/iot_cloud_apps/iot_bridge/logs \
+	&& rm -rf /home/frappe/services/iot_cloud_apps/iot_ws_api/logs \
 	&& ln -s /home/frappe/services/logs/iot_cloud_apps/iot/logs /home/frappe/services/iot_cloud_apps/iot/logs \
 	&& ln -s /home/frappe/services/logs/iot_cloud_apps/iot_bridge/logs /home/frappe/services/iot_cloud_apps/iot_bridge/logs \
 	&& ln -s /home/frappe/services/logs/iot_cloud_apps/iot_ws_api/logs /home/frappe/services/iot_cloud_apps/iot_ws_api/logs \
