@@ -9,8 +9,9 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /home/frappe/services
 RUN install_packages \
     git \
+	gettext-base \
 	supervisor \
-    && apt-get purge -y wget && apt-get autoremove -y
+    && apt-get autoremove -y
 
 # Create frappe-bench directories
 RUN mkdir -p /home/frappe/services/logs
