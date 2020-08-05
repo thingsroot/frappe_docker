@@ -62,7 +62,7 @@ services:
       - assets-vol:/home/frappe/frappe-bench/sites/assets:rw
 
   thingsroot-services:
-    image: thingsroot/thingsroot-services:$(THINGSROOT_VERSION}
+    image: thingsroot/thingsroot-services:${THINGSROOT_VERSION}
     restart: on-failure
     depends_on:
       - thingsroot-python
