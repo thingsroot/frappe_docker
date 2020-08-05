@@ -100,8 +100,6 @@ chown -R frappe:frappe /home/frappe/services/logs
 if [ "$1" = 'start' ]; then
   configureEnv
 
-  chown frappe:frappe /home/frappe/frappe-bench/sites/common_site_config.json
-
   if [ -f /etc/default/supervisor ]; then
 	  source /etc/default/supervisor
   fi
