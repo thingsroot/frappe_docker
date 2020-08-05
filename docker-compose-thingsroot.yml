@@ -61,6 +61,28 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
       - assets-vol:/home/frappe/frappe-bench/sites/assets:rw
 
+  thingsroot-services:
+    image: thingsroot/thignsroot-services:$(THINGSROOT_VERSION}
+    restart: on-failure
+    depends_on:
+      - thingsroot-python
+      - emqx-thingsroot
+      - redis-thingsroot
+      - influxdb-thingsroot
+    environment:
+      - FRAPPE_PY=thingsroot-python
+      - FRAPPE_PY_PORT=8000
+      - FRAPPE_AUTH_CODE=${FRAPPE_AUTH_CODE}
+      - MQTT_HOST=emqx-thingsroot
+      - MQTT_USER=${MQTT_USER}
+      - MQTT_PASSWORD=${MQTT_PASSWORD}
+      - INFLUXDB_HOST=influxdb-thingsroot
+      - INFLUXDB_USER=${INFLUXDB_USER}
+      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
+      - REDIS_HOST=redis-thingsroot
+    volumes:
+      - thingsroot-services-vol:/home/frappe/services/logs:rw
+
   frappe-socketio:
     image: frappe/frappe-socketio:${FRAPPE_VERSION}
     restart: on-failure
@@ -131,6 +153,57 @@ services:
     volumes:
       - redis-socketio-vol:/data
 
+  redis-thingsroot:
+    image: redis:latest
+    restart: on-failure
+    volumes:
+      - redis-thingsroot-vol:/data
+
+  influxdb-thingsroot:
+    image: influxdb:latest
+    restart: on-failure
+    environment:
+      - INFLUXDB_ADMIN_USER=${INFLUXDB_USER}
+      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
+    volumes:
+      - influxdb-thingsroot-vol:/var/lib/influxdb:rw
+
+  chronograf-thingsroot:
+    image: chronograf:latest
+    restart: on-failure
+    depends_on:
+      - influxdb-thingsroot
+    ports:
+      - "8888:8888"
+    volumes:
+      - chronograf-thingsroot-vol:/var/lib/chronograf:rw
+
+  emqx-thingsroot:
+    image: emqx/emqx:latest
+    restart: on-failure
+    depends_on:
+      - thingsroot-python
+    environment:
+      - EMQX_ADMIN_PASSWORD=${MQTT_DASHBOARD_PASSWORD}
+      - EMQX_LOADED_PLUGINS="emqx_management | emqx_auth_http | emqx_recon | emqx_retainer | emqx_dashboard"
+      - EMQX_AUTH__HTTP__AUTH_REQ="http://thingsroot-python:8000/api/method/iot.mqtt_auth_v2.auth"
+      - EMQX_AUTH__HTTP__AUTH_REQ__METHOD="get"
+      - EMQX_AUTH__HTTP__AUTH_REQ__PARAMS="clientid=%c,username=%u,password=%P"
+      - EMQX_AUTH__HTTP__SUPER_REQ="http://thingsroot-python:8000/api/method/iot.mqtt_auth_v2.superuser"
+      - EMQX_AUTH__HTTP__SUPER_REQ__METHOD="get"
+      - EMQX_AUTH__HTTP__SUPER_REQ__PARAMS="clientid=%c,username=%u"
+      - EMQX_AUTH__HTTP__ACL_REQ="http://thingsroot-python:8000/api/method/iot.mqtt_auth_v2.acl"
+      - EMQX_AUTH__HTTP__ACL_REQ__METHOD="get"
+      - EMQX_AUTH__HTTP__ACL_REQ__PARAMS="access=%A,username=%u,clientid=%c,ipaddr=%a,topic=%t"
+    ports:
+      - "18083:18083"
+      - "1883:1883"
+      - "8883:8883"
+    volumes:
+      - emqx-thingsroot-data-vol:/opt/emqx/data:rw
+      - emqx-thingsroot-etc-vol:/opt/emqx/etc:rw
+      - emqx-thingsroot-log-vol:/opt/emqx/log:rw
+
   mariadb:
     image: mariadb:10.3
     restart: on-failure
@@ -160,6 +233,13 @@ volumes:
   redis-cache-vol:
   redis-queue-vol:
   redis-socketio-vol:
+  redis-thingsroot-vol:
+  influxdb-thingsroot-vol:
+  chronograf-thingsroot-vol:
+  emqx-thingsroot-data-vol:
+  emqx-thingsroot-etc-vol:
+  emqx-thingsroot-log-vol:
+  thingsroot-services-vol:
   assets-vol:
   sites-vol:
   cert-vol:

@@ -14,3 +14,9 @@ HTTPS_REDIRECT_RULE_LABEL=traefik.http.routers.http-catchall.rule=hostregexp(`{h
 HTTPS_REDIRECT_ENTRYPOINT_LABEL=traefik.http.routers.http-catchall.entrypoints=web
 HTTPS_REDIRECT_MIDDLEWARE_LABEL=traefik.http.routers.http-catchall.middlewares=redirect-to-https
 HTTPS_USE_REDIRECT_MIDDLEWARE_LABEL=traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+FRAPPE_AUTH_CODE=1234567890
+MQTT_USER=root
+MQTT_PASSWORD=1234567890
+MQTT_DASHBOARD_PASSWORD=admin
+INFLUXDB_USER=root
+INFLUXDB_PASSWORD=admin
