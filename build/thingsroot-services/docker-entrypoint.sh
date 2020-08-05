@@ -63,8 +63,8 @@ function configureEnv() {
 			export FRAPPE_AUTH_CODE="1234567890"
 		fi
 
-		export REDIS_URL="redis://${REDIS_HOST}:${REDIS_HOST}"
-		export FRAPPE_URL="http://${FRAPPE_PY_HOST}:${FRAPPE_PY_HOST}"
+		export REDIS_URL="redis://${REDIS_HOST}:${REDIS_PORT}"
+		export FRAPPE_URL="http://${FRAPPE_PY}:${FRAPPE_PY_PORT}"
 
 		envsubst '${MQTT_HOST}
 		${MQTT_PORT}

@@ -16,6 +16,7 @@ RUN install_packages \
 # Create frappe-bench directories
 RUN mkdir -p /var/log/supervisor \
 	&& mkdir -p /var/log/supervisor/iot_mqtt_clients \
+	&& touch /var/log/supervisor/iot_mqtt_clients/__keepme \
 	&& mkdir -p /var/log/supervisor/iot_cloud_apps/iot \
 	&& mkdir -p /var/log/supervisor/iot_cloud_apps/iot_bridge \
 	&& mkdir -p /var/log/supervisor/iot_cloud_apps/iot_ws_api
