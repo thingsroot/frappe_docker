@@ -19,16 +19,15 @@ RUN mkdir -p /home/frappe/services/logs
 # Setup iot_mqtt_clients 
 RUN git clone --depth 1 -o upstream https://github.com/symgrid/iot_mqtt_clients --branch ${GIT_BRANCH} \
     && pip3 install --no-cache-dir -r iot_mqtt_clients/requirements.txt \
-	&& ln -s /home/frappe/services/iot_mqtt_clients /usr/iot_mqtt_clients \
 	&& ln -s /home/frappe/services/iot_mqtt_clients/supervisor.conf /etc/supervisor/conf.d/iot_mqtt_clients.conf \
 	&& rm -rf /home/frappe/services/iot_mqtt_clients/logs \
 	&& mkdir -p /home/frappe/services/logs/iot_mqtt_clients \
 	&& ln -s /home/frappe/services/logs/iot_mqtt_clients /home/frappe/services/iot_mqtt_clients/logs \
-	&& rm -f /home/frappe/services/iot_mqtt_clients/config.ini
+	&& rm -f /home/frappe/services/iot_mqtt_clients/config.ini \
+	&& ln -s /home/frappe/services/iot_mqtt_clients /usr/iot_mqtt_clients
 
 RUN git clone --depth 1 -o upstream https://github.com/symgrid/iot_cloud_apps --branch ${GIT_BRANCH} \
     && pip3 install --no-cache-dir -r iot_cloud_apps/requirements.txt \
-	&& ln -s /home/frappe/services/iot_cloud_apps /usr/iot_cloud_apps \
 	&& ln -s /home/frappe/services/iot_cloud_apps/supervisor.conf /etc/supervisor/conf.d/iot_cloud_apps.conf \
 	&& mkdir -p /home/frappe/services/logs/iot_cloud_apps/iot/logs \
 	&& mkdir -p /home/frappe/services/logs/iot_cloud_apps/iot_bridge/logs \
@@ -39,7 +38,8 @@ RUN git clone --depth 1 -o upstream https://github.com/symgrid/iot_cloud_apps --
 	&& ln -s /home/frappe/services/logs/iot_cloud_apps/iot/logs /home/frappe/services/iot_cloud_apps/iot/logs \
 	&& ln -s /home/frappe/services/logs/iot_cloud_apps/iot_bridge/logs /home/frappe/services/iot_cloud_apps/iot_bridge/logs \
 	&& ln -s /home/frappe/services/logs/iot_cloud_apps/iot_ws_api/logs /home/frappe/services/iot_cloud_apps/iot_ws_api/logs \
-	&& rm -f /home/frappe/services/iot_cloud_apps/config.ini
+	&& rm -f /home/frappe/services/iot_cloud_apps/config.ini \
+	&& ln -s /home/frappe/services/iot_cloud_apps /usr/iot_cloud_apps
 
 # Copy scripts and templates
 COPY build/thingsroot-services/iot_mqtt_clients.config.ini.template /home/frappe/services/iot_mqtt_clients/config.ini.template
@@ -49,7 +49,7 @@ COPY build/thingsroot-services/iot_cloud_apps.config.ini.template /home/frappe/s
 COPY build/thingsroot-services/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 # Set ownership of sites directory
-RUN chown -R frappe:frappe /home/frappe/services
+RUN chown -R frappe:frappe /home/frappe/services/logs
 
 VOLUME [ "/home/frappe/services/logs" ]
 
