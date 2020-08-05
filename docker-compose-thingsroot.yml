@@ -195,6 +195,10 @@ services:
       - EMQX_AUTH__HTTP__ACL_REQ="http://thingsroot-python:8000/api/method/iot.mqtt_auth_v2.acl"
       - EMQX_AUTH__HTTP__ACL_REQ__METHOD="get"
       - EMQX_AUTH__HTTP__ACL_REQ__PARAMS="access=%A,username=%u,clientid=%c,ipaddr=%a,topic=%t"
+      - EMQX_RETAINER__STORAGE_TYPE=disc
+      - EMQX_RETAINER__MAX_RETAINED_MESSAGES=0
+      - EMQX_RETAINER__MAX_PAYLOAD_SIZE=4MB
+      - EMQX_RETAINER__EXPIRY_INTERVAL=0
     ports:
       - "18083:18083"
       - "1883:1883"
