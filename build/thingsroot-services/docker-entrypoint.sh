@@ -104,5 +104,5 @@ if [ "$1" = 'start' ]; then
 	  source /etc/default/supervisor
   fi
 
-  supervisord -c /etc/supervisor/supervisord.conf
+  supervisord --nodaemon -c /etc/supervisor/supervisord.conf
 fi
