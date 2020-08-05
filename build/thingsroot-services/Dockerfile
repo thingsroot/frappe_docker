@@ -19,7 +19,7 @@ RUN mkdir -p /home/frappe/services/logs
 # Setup iot_mqtt_clients 
 RUN git clone --depth 1 -o upstream https://github.com/symgrid/iot_mqtt_clients --branch ${GIT_BRANCH} \
     && pip3 install --no-cache-dir -r iot_mqtt_clients/requirements.txt \
-	&& ln -s /home/frappe/services/iot_mqtt_clients/supervisor.conf /etc/supervisor/conf.d/iot_mqtt_clients.conf \
+	&& ln -s /home/frappe/services/iot_mqtt_clients/supervisor_docker.conf /etc/supervisor/conf.d/iot_mqtt_clients.conf \
 	&& rm -rf /home/frappe/services/iot_mqtt_clients/logs \
 	&& mkdir -p /home/frappe/services/logs/iot_mqtt_clients \
 	&& ln -s /home/frappe/services/logs/iot_mqtt_clients /home/frappe/services/iot_mqtt_clients/logs \
@@ -28,7 +28,7 @@ RUN git clone --depth 1 -o upstream https://github.com/symgrid/iot_mqtt_clients 
 
 RUN git clone --depth 1 -o upstream https://github.com/symgrid/iot_cloud_apps --branch ${GIT_BRANCH} \
     && pip3 install --no-cache-dir -r iot_cloud_apps/requirements.txt \
-	&& ln -s /home/frappe/services/iot_cloud_apps/supervisor.conf /etc/supervisor/conf.d/iot_cloud_apps.conf \
+	&& ln -s /home/frappe/services/iot_cloud_apps/supervisor_docker.conf /etc/supervisor/conf.d/iot_cloud_apps.conf \
 	&& mkdir -p /home/frappe/services/logs/iot_cloud_apps/iot/logs \
 	&& mkdir -p /home/frappe/services/logs/iot_cloud_apps/iot_bridge/logs \
 	&& mkdir -p /home/frappe/services/logs/iot_cloud_apps/iot_ws_api/logs \
