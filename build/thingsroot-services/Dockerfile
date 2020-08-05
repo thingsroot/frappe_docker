@@ -22,6 +22,7 @@ RUN git clone --depth 1 -o upstream https://github.com/symgrid/iot_mqtt_clients 
 	&& ln -s /home/frappe/services/iot_mqtt_clients /usr/iot_mqtt_clients \
 	&& ln -s /home/frappe/services/iot_mqtt_clients/supervisor.conf /etc/supervisor/conf.d/iot_mqtt_clients.conf \
 	&& rm -rf /home/frappe/services/iot_mqtt_clients/logs \
+	&& mkdir -p /home/frappe/services/logs/iot_mqtt_clients \
 	&& ln -s /home/frappe/services/logs/iot_mqtt_clients /home/frappe/services/iot_mqtt_clients/logs \
 	&& rm -f /home/frappe/services/iot_mqtt_clients/config.ini
 
