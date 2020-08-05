@@ -81,7 +81,7 @@ services:
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
       - REDIS_HOST=redis-thingsroot
     volumes:
-      - thingsroot-services-vol:/home/frappe/services/logs:rw
+      - thingsroot-services-vol:/var/log/supervisor:rw
 
   frappe-socketio:
     image: frappe/frappe-socketio:${FRAPPE_VERSION}
