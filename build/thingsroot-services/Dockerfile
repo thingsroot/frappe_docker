@@ -49,7 +49,8 @@ COPY build/thingsroot-services/iot_cloud_apps.config.ini.template /home/frappe/s
 COPY build/thingsroot-services/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 # Set ownership of sites directory
-RUN chown -R frappe:frappe /home/frappe/services/logs
+RUN chown -R frappe:frappe /var/log/supervisor/iot_mqtt_clients
+RUN chown -R frappe:frappe /var/log/supervisor/iot_cloud_apps
 
 VOLUME [ "/var/log/supervisor" ]
 

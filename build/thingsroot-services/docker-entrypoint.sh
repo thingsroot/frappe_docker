@@ -95,7 +95,8 @@ function configureEnv() {
 }
 
 # Allow user process to create files in logs directory
-chown -R frappe:frappe /home/frappe/services/logs
+chown -R frappe:frappe /var/log/supervisor/iot_mqtt_clients
+chown -R frappe:frappe /var/log/supervisor/iot_cloud_apps
 
 if [ "$1" = 'start' ]; then
   configureEnv
