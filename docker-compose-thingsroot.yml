@@ -50,6 +50,7 @@ services:
   thingsroot-python:
     image: thingsroot/thingsroot-worker:${THINGSROOT_VERSION}
     restart: on-failure
+    domainname: ${SITE_NAME}
     environment:
       - MARIADB_HOST=${MARIADB_HOST}
       - REDIS_CACHE=redis-cache:6379
@@ -69,8 +70,6 @@ services:
       - emqx-thingsroot
       - redis-thingsroot
       - influxdb-thingsroot
-    extra_hosts:
-      - "${SITE_NAME}:thingsroot-python"
     environment:
       - FRAPPE_PY=${SITE_NAME}
       - FRAPPE_PY_PORT=8000
@@ -188,13 +187,13 @@ services:
     environment:
       - EMQX_ADMIN_PASSWORD=${MQTT_DASHBOARD_PASSWORD}
       - EMQX_LOADED_PLUGINS="emqx_management | emqx_auth_http | emqx_recon | emqx_retainer | emqx_dashboard"
-      - EMQX_AUTH__HTTP__AUTH_REQ="http://thingsroot-python:8000/api/method/iot.mqtt_auth_v2.auth"
+      - EMQX_AUTH__HTTP__AUTH_REQ="http://${SITE_NAME}:8000/api/method/iot.mqtt_auth_v2.auth"
       - EMQX_AUTH__HTTP__AUTH_REQ__METHOD="get"
       - EMQX_AUTH__HTTP__AUTH_REQ__PARAMS="clientid=%c,username=%u,password=%P"
-      - EMQX_AUTH__HTTP__SUPER_REQ="http://thingsroot-python:8000/api/method/iot.mqtt_auth_v2.superuser"
+      - EMQX_AUTH__HTTP__SUPER_REQ="http://${SITE_NAME}:8000/api/method/iot.mqtt_auth_v2.superuser"
       - EMQX_AUTH__HTTP__SUPER_REQ__METHOD="get"
       - EMQX_AUTH__HTTP__SUPER_REQ__PARAMS="clientid=%c,username=%u"
-      - EMQX_AUTH__HTTP__ACL_REQ="http://thingsroot-python:8000/api/method/iot.mqtt_auth_v2.acl"
+      - EMQX_AUTH__HTTP__ACL_REQ="http://${SITE_NAME}:8000/api/method/iot.mqtt_auth_v2.acl"
       - EMQX_AUTH__HTTP__ACL_REQ__METHOD="get"
       - EMQX_AUTH__HTTP__ACL_REQ__PARAMS="access=%A,username=%u,clientid=%c,ipaddr=%a,topic=%t"
       - EMQX_RETAINER__STORAGE_TYPE=disc

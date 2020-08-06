@@ -103,6 +103,13 @@ chown -R frappe:frappe /var/log/supervisor/iot_cloud_apps
 if [ "$1" = 'start' ]; then
   configureEnv
 
+  echo "Waiting for frappe-python to be available on $FRAPPE_PY port $FRAPPE_PY_PORT"
+  timeout 10 bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$0/$1; do sleep 1; done' $FRAPPE_PY $FRAPPE_PY_PORT
+  echo "Frappe-python available on $FRAPPE_PY port $FRAPPE_PY_PORT"
+  echo "Waiting for MQTT to be available on $MQTT_HOST port $MQTT_PORT"
+  timeout 10 bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$0/$1; do sleep 1; done' $MQTT_HOST $MQTT_PORT
+  echo "MQTT available on $FRAPPE_SOCKETIO port $SOCKETIO_PORT"
+
   if [ -f /etc/default/supervisor ]; then
 	  source /etc/default/supervisor
   fi
