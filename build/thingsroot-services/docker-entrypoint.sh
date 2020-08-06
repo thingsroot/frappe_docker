@@ -95,6 +95,8 @@ function configureEnv() {
 }
 
 # Allow user process to create files in logs directory
+mkdir -p /var/log/supervisor/iot_mqtt_clients
+mkdir -p /var/log/supervisor/iot_cloud_apps
 chown -R frappe:frappe /var/log/supervisor/iot_mqtt_clients
 chown -R frappe:frappe /var/log/supervisor/iot_cloud_apps
 
