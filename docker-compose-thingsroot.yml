@@ -69,8 +69,10 @@ services:
       - emqx-thingsroot
       - redis-thingsroot
       - influxdb-thingsroot
+    extra_hosts:
+      - "${SITE_NAME}:thingsroot-python"
     environment:
-      - FRAPPE_PY=thingsroot-python
+      - FRAPPE_PY=${SITE_NAME}
       - FRAPPE_PY_PORT=8000
       - FRAPPE_AUTH_CODE=${FRAPPE_AUTH_CODE}
       - MQTT_HOST=emqx-thingsroot
