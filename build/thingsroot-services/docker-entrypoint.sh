@@ -24,7 +24,7 @@ function configureEnv() {
 		fi
 
 		if [[ -z "$MQTT_PORT" ]]; then
-			export MQTT_PORT=3306
+			export MQTT_PORT=1883
 		fi
 
 		if [[ -z "$MQTT_KEEPALIVE" ]]; then
