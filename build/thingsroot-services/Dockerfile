@@ -13,6 +13,8 @@ RUN install_packages \
 	supervisor \
     && apt-get autoremove -y
 
+RUN pip3 install --no-cache-dir git+https://github.com/Pithikos/python-websocket-server
+
 # Create frappe-bench directories
 RUN mkdir -p /var/log/supervisor \
 	&& mkdir -p /var/log/supervisor/iot_mqtt_clients \
