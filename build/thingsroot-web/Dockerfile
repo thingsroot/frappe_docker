@@ -13,7 +13,10 @@ RUN git clone --depth 1 https://github.com/thingsroot/ReactProject --branch $GIT
 
 COPY build/thingsroot-web/assets_path_index.js /var/www/ReactProject/src/assets/path/index.js
 
-RUN cd ReactProject && npm install && npm run build
+RUN cd ReactProject \
+	&& npm install \
+	&& npm run build
+
 RUN node --version \
     && npm --version
 
