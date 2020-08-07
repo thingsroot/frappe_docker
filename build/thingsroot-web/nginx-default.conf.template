@@ -1,29 +1,29 @@
 upstream frappe-server {
-    server ${FRAPPE_PY}:${FRAPPE_PY_PORT} fail_timeout=0;
+	server ${FRAPPE_PY}:${FRAPPE_PY_PORT} fail_timeout=0;
 }
 
 upstream api-server {
-    server ${API_HOST}:${API_PORT} fail_timeout=0;
+	server ${API_HOST}:${API_PORT} fail_timeout=0;
 }
 
 upstream mqtt-server {
-    server ${MQTT_HOST}:${MQTT_WS_PORT} fail_timeout=0;
+	server ${MQTT_HOST}:${MQTT_WS_PORT} fail_timeout=0;
 }
 
 server {
-    listen 80;
-    server_name $http_host;
-    root /var/www/html;
+	listen 80;
+	server_name $http_host;
+	root /var/www/html;
 
-    # add_header X-Frame-Options "SAMEORIGIN";
-    # add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
-    # add_header X-Content-Type-Options nosniff;
-    # add_header X-XSS-Protection "1; mode=block";
+# add_header X-Frame-Options "SAMEORIGIN";
+# add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
+# add_header X-Content-Type-Options nosniff;
+# add_header X-XSS-Protection "1; mode=block";
 
-    location / {
+	location / {
 		index index.html index.htm;
-        try_files $uri /index.html;
-    }
+		try_files $uri /index.html;
+	}
 
 	location /mqtt_ws {
 		proxy_redirect off;
@@ -79,47 +79,47 @@ server {
 		proxy_pass http://frappe-server/api/method/frappe.integrations.oauth2.;
 	}
 
-    # error pages
-    error_page 502 /502.html;
-    location /502.html {
-        root /var/www/templates;
-        internal;
-    }
+# error pages
+	error_page 502 /502.html;
+	location /502.html {
+		root /var/www/templates;
+		internal;
+	}
 
-    # optimizations
-    sendfile on;
-    keepalive_timeout 15;
-    client_max_body_size 50m;
-    client_body_buffer_size 16K;
-    client_header_buffer_size 1k;
+# optimizations
+	sendfile on;
+	keepalive_timeout 15;
+	client_max_body_size 50m;
+	client_body_buffer_size 16K;
+	client_header_buffer_size 1k;
 
-    # enable gzip compresion
-    # based on https://mattstauffer.co/blog/enabling-gzip-on-nginx-servers-including-laravel-forge
-    gzip on;
-    gzip_http_version 1.1;
-    gzip_comp_level 5;
-    gzip_min_length 256;
-    gzip_proxied any;
-    gzip_vary on;
-    gzip_types
-        application/atom+xml
-        application/javascript
-        application/x-javascript
-        application/json
-        application/rss+xml
-        application/vnd.ms-fontobject
-        application/x-font-ttf
-        application/font-woff
-        application/x-web-app-manifest+json
-        application/xhtml+xml
-        application/xml
-        font/opentype
-        image/svg+xml
-        image/x-icon
-        text/css
-        text/plain
+# enable gzip compresion
+# based on https://mattstauffer.co/blog/enabling-gzip-on-nginx-servers-including-laravel-forge
+	gzip on;
+	gzip_http_version 1.1;
+	gzip_comp_level 5;
+	gzip_min_length 256;
+	gzip_proxied any;
+	gzip_vary on;
+	gzip_types
+		application/atom+xml
+		application/javascript
+		application/x-javascript
+		application/json
+		application/rss+xml
+		application/vnd.ms-fontobject
+		application/x-font-ttf
+		application/font-woff
+		application/x-web-app-manifest+json
+		application/xhtml+xml
+		application/xml
+		font/opentype
+		image/svg+xml
+		image/x-icon
+		text/css
+		text/plain
 		text/xml
 		text/javascript
-        text/x-component;
-        # text/html is always compressed by HttpGzipModule
+		text/x-component;
+# text/html is always compressed by HttpGzipModule
 }
