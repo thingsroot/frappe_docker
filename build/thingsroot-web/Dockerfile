@@ -15,7 +15,7 @@ COPY build/thingsroot-web/assets_path_index.js /var/www/ReactProject/src/assets/
 
 RUN mkdir ~/.npm-global \
 	&& npm config set prefix '~/.npm-global' \
-	&& echo "export PATH=~/.npm-global/bin:$PATH >> /etc/profile
+	&& echo "export PATH=~/.npm-global/bin:$PATH" >> /etc/profile
 
 RUN cd ReactProject \
 	&& source /etc/profile \
