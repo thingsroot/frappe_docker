@@ -86,6 +86,39 @@ services:
     volumes:
       - thingsroot-services-vol:/var/log/supervisor:rw
 
+  thingsroot-node-api:
+    image: thingsroot/thingsroot-node-api:${THINGSROOT_VERSION}
+    restart: on-failure
+    links:
+      - "thingsroot-python:${SITE_NAME}"
+    depends_on:
+      - thingsroot-python
+      - redis-thingsroot
+      - influxdb-thingsroot
+    environment:
+      - FRAPPE_PY=${SITE_NAME}
+      - FRAPPE_PY_PORT=8000
+      - INFLUXDB_HOST=influxdb-thingsroot
+      - INFLUXDB_USER=${INFLUXDB_USER}
+      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
+      - REDIS_HOST=redis-thingsroot
+
+  thingsroot-web:
+    image: thingsroot/thingsroot-web:${THINGSROOT_VERSION}
+    restart: on-failure
+    links:
+      - "thingsroot-python:${SITE_NAME}"
+    depends_on:
+      - thingsroot-web-js
+    environment:
+      - CLOUD_SITE_NAME=${CLOUD_SITE_NAME}
+      - SITE_NAME=${SITE_NAME}
+      - FRAPPE_PY=${SITE_NAME}
+      - FRAPPE_PY_PORT=8000
+      - MQTT_HOST=emqx-thingsroot
+      - REDIS_HOST=redis-thingsroot
+      - API_HOST=thingsroot-node-api
+
   frappe-socketio:
     image: frappe/frappe-socketio:${FRAPPE_VERSION}
     restart: on-failure

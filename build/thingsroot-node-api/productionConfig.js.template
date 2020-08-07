@@ -1,0 +1,15 @@
+const domain = 'http://${FRAPPE_PY}:${FRAPPE_PY_PORT}'
+module.exports = {
+	influxdb: {
+		user: '${INFLUXDB_USER}',
+		password: '${INFLUXDB_PASSWORD}',
+		port: ${INFLUXDB_PORT},
+		host: '${INFLUXDB_HOST}'
+	},
+	redis: {
+		port: ${REDIS_PORT},
+		host: '${REDIS_HOST}'
+	},
+	domain: domain,
+	path: domain + '/api/method/ioe_api.'
+}
