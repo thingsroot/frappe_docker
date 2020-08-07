@@ -18,7 +18,7 @@ RUN mkdir ~/.npm-global \
 	&& echo "export PATH=~/.npm-global/bin:$PATH" >> /etc/profile
 
 RUN cd ReactProject \
-	&& source /etc/profile \
+	&& export PATH=~/.npm-global/bin:$PATH \
 	&& npm install \
 	&& npm run build
 
