@@ -109,7 +109,10 @@ services:
     links:
       - "thingsroot-python:${SITE_NAME}"
     depends_on:
-      - thingsroot-web-js
+      - thingsroot-node-api
+      - thingsroot-python
+      - redis-thingsroot
+      - emqx-thingsroot
     environment:
       - CLOUD_SITE_NAME=${CLOUD_SITE_NAME}
       - SITE_NAME=${SITE_NAME}
