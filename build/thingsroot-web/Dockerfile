@@ -13,7 +13,12 @@ RUN git clone --depth 1 https://github.com/thingsroot/ReactProject --branch $GIT
 
 COPY build/thingsroot-web/assets_path_index.js /var/www/ReactProject/src/assets/path/index.js
 
+RUN mkdir ~/.npm-global \
+	&& npm config set prefix '~/.npm-global' \
+	&& echo "export PATH=~/.npm-global/bin:$PATH >> /etc/profile
+
 RUN cd ReactProject \
+	&& source /etc/profile \
 	&& npm install \
 	&& npm run build
 
