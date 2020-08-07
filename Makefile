@@ -4,7 +4,11 @@
 MF_DOCKER_IMAGE_NAME_PREFIX ?= thingsroot
 BUILD_BRANCH ?= master
 PROJECT_NAME ?= thingsroot
-SERVICES = thingsroot-worker thingsroot-nginx thingsroot-services
+SERVICES = thingsroot-node-api \
+		   thingsroot-web \
+		   thingsroot-services \
+		   thingsroot-worker \
+		   thingsroot-nginx
 DOCKERS = $(addprefix docker_,$(SERVICES))
 
 define make_docker
