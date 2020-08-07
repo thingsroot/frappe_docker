@@ -65,6 +65,8 @@ services:
   thingsroot-services:
     image: thingsroot/thingsroot-services:${THINGSROOT_VERSION}
     restart: on-failure
+    links:
+      - "thingsroot-python:${SITE_NAME}"
     depends_on:
       - thingsroot-python
       - emqx-thingsroot

@@ -108,7 +108,7 @@ if [ "$1" = 'start' ]; then
   echo "Frappe-python available on $FRAPPE_PY port $FRAPPE_PY_PORT"
   echo "Waiting for MQTT to be available on $MQTT_HOST port $MQTT_PORT"
   timeout 10 bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$0/$1; do sleep 1; done' $MQTT_HOST $MQTT_PORT
-  echo "MQTT available on $FRAPPE_SOCKETIO port $SOCKETIO_PORT"
+  echo "MQTT available on $MQTT_HOST port $MQTT_PORT"
 
   if [ -f /etc/default/supervisor ]; then
 	  source /etc/default/supervisor
