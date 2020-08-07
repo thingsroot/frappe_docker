@@ -19,10 +19,10 @@ RUN node --version \
 
 RUN rm /var/www/nodeServer/config/productionConfig.js
 
-COPY build/thingsroot-web-js/productionConfig.js.template /var/www/nodeServer/config/productionConfig.js.template
+COPY build/thingsroot-node-api/productionConfig.js.template /var/www/nodeServer/config/productionConfig.js.template
 
 # Setup docker-entrypoint
-COPY build/thingsroot-web-js/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY build/thingsroot-node-api/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["start"]
