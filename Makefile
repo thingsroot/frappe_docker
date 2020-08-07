@@ -27,6 +27,9 @@ all: $(DOCKERS)
 
 clean: cleandocker
 
+clean_image:
+	docker rmi -f  `docker images | grep '<none>' | awk '{print $3}'`
+
 cleandocker:
 	# Stop all containers (if running)
 	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml stop
