@@ -28,7 +28,7 @@ RUN node --version \
 FROM nginx:latest
 COPY --from=0 /var/www/ReactProject/build/* /var/www/html/
 COPY build/thingsroot-web/nginx-default.conf.template /etc/nginx/conf.d/default.conf.template
-COPY build/frappe-nginx/docker-entrypoint.sh /usr/local/bin/
+COPY build/thingsroot-web/docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
