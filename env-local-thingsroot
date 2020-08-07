@@ -21,3 +21,5 @@ MQTT_DASHBOARD_PASSWORD=admin
 INFLUXDB_USER=root
 INFLUXDB_PASSWORD=admin
 CLOUD_SITE_NAME=cloud.localhost
+CLOUD_SITES=`cloud.localhost`
+CLOUD_ENTRYPOINT_LABEL=traefik.http.routers.thingsroot-web.entrypoints=web

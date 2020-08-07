@@ -121,6 +121,12 @@ services:
       - MQTT_HOST=emqx-thingsroot
       - REDIS_HOST=redis-thingsroot
       - API_HOST=thingsroot-node-api
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.thingsroot-web.rule=Host(${CLOUD_SITES})"
+      - "${CLOUD_ENTRYPOINT_LABEL}"
+      - "${CERT_RESOLVER_LABEL}"
+      - "traefik.http.services.thingsroot-web.loadbalancer.server.port=80"
 
   frappe-socketio:
     image: frappe/frappe-socketio:${FRAPPE_VERSION}
