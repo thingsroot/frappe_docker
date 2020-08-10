@@ -18,6 +18,7 @@ RUN node --version \
     && npm --version
 
 RUN rm /var/www/nodeServer/config/productionConfig.js
+RUN sed -i -e 's/127.0.0.1/0.0.0.0/' /var/www/nodeServer/bin/www.js
 
 COPY build/thingsroot-node-api/productionConfig.js.template /var/www/nodeServer/config/productionConfig.js.template
 
