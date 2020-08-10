@@ -24,5 +24,7 @@ COPY build/thingsroot-node-api/productionConfig.js.template /var/www/nodeServer/
 # Setup docker-entrypoint
 COPY build/thingsroot-node-api/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
+EXPOSE 8881
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["start"]
