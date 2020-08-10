@@ -27,8 +27,17 @@ all: $(DOCKERS)
 
 clean: cleandocker
 
-clean_image:
-	docker rmi -f  `docker images | grep '<none>' | awk '{print $3}'`
+clean_images:
+	docker rmi -f `docker images | grep '<none>' | awk '{print $3}'`
+
+clean_volumns:
+	docker volume ls -f dangling=true -q | xargs -r docker volume rm -f
+
+clean_all_volumns: clean_all_containers
+	docker volume ls -q | xargs -r docker volume rm -f
+
+clean_all_containers:
+	docker container ls -a -q | xargs -r docker container rm -f
 
 cleandocker:
 	# Stop all containers (if running)

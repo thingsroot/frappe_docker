@@ -34,9 +34,9 @@ server {
 		rewrite ^.+api/?(.*)$ /$1 break;
 		proxy_set_header X-Forwarded-For $remote_addr;
 		proxy_set_header X-Forwarded-Proto $scheme;
-		proxy_set_header X-Frappe-Site-Name $host;
+		proxy_set_header X-Frappe-Site-Name ${SITE_NAME};
 		proxy_set_header X-Real-IP $remote_addr;
-		proxy_set_header Host ${SITE_NAME};
+		proxy_set_header Host $host;
 		proxy_set_header X-Use-X-Accel-Redirect True;
 		proxy_read_timeout 120;
 		proxy_redirect off;
@@ -48,9 +48,9 @@ server {
 		rewrite ^.+apis/?(.*)$ /$1 break;
 		proxy_set_header X-Forwarded-For $remote_addr;
 		proxy_set_header X-Forwarded-Proto $scheme;
-		proxy_set_header X-Frappe-Site-Name $host;
+		proxy_set_header X-Frappe-Site-Name ${SITE_NAME};
 		proxy_set_header X-Real-IP $remote_addr;
-		proxy_set_header Host ${SITE_NAME};
+		proxy_set_header Host $host;
 		proxy_set_header X-Use-X-Accel-Redirect True;
 		proxy_read_timeout 120;
 		proxy_redirect off;
@@ -59,19 +59,37 @@ server {
 	}
 
 	location /store_assets/ {
+		proxy_set_header X-Forwarded-For $remote_addr;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header X-Frappe-Site-Name ${SITE_NAME};
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Use-X-Accel-Redirect True;
+		proxy_read_timeout 120;
+		proxy_redirect off;
+
 		proxy_pass http://frappe-server;
 	}
 
 	location /files/ {
+		proxy_set_header X-Forwarded-For $remote_addr;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header X-Frappe-Site-Name ${SITE_NAME};
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Use-X-Accel-Redirect True;
+		proxy_read_timeout 120;
+		proxy_redirect off;
+
 		proxy_pass http://frappe-server/files/;
 	}
 
 	location /frappeauth/ {
 		proxy_set_header X-Forwarded-For $remote_addr;
 		proxy_set_header X-Forwarded-Proto $scheme;
-		proxy_set_header X-Frappe-Site-Name $host;
+		proxy_set_header X-Frappe-Site-Name ${SITE_NAME};
 		proxy_set_header X-Real-IP $remote_addr;
-		proxy_set_header Host ${SITE_NAME};
+		proxy_set_header Host $host;
 		proxy_set_header X-Use-X-Accel-Redirect True;
 		proxy_read_timeout 120;
 		proxy_redirect off;

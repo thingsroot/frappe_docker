@@ -35,6 +35,8 @@ yarn install --production=true
 
 mkdir -p /home/frappe/frappe-bench/sites/assets/app_center
 cp -R /home/frappe/frappe-bench/apps/app_center/app_center/public/* /home/frappe/frappe-bench/sites/assets/app_center
+mkdir -p /home/frappe/frappe-bench/sites/assets/iot/images
+cp -R /home/frappe/frappe-bench/apps/app_center/app_center/public/images /home/frappe/frappe-bench/sites/assets/iot/images
 
 # Add frappe and all the apps available under in frappe-bench here
 echo "rsync -a --delete /var/www/html/assets/frappe /assets" > /rsync

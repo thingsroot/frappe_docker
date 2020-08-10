@@ -50,7 +50,6 @@ services:
   thingsroot-python:
     image: thingsroot/thingsroot-worker:${THINGSROOT_VERSION}
     restart: on-failure
-    domainname: ${SITE_NAME}
     environment:
       - MARIADB_HOST=${MARIADB_HOST}
       - REDIS_CACHE=redis-cache:6379
