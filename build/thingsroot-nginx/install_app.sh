@@ -41,6 +41,7 @@ cp -R /home/frappe/frappe-bench/apps/app_center/app_center/public/images /home/f
 # Add frappe and all the apps available under in frappe-bench here
 echo "rsync -a --delete /var/www/html/assets/frappe /assets" > /rsync
 echo "rsync -a --delete /var/www/html/assets/app_center /assets" >> /rsync
+echo "rsync -a --delete /var/www/html/assets/iot /assets" >> /rsync
 chmod +x /rsync
 
 rm /home/frappe/frappe-bench/sites/apps.txt
