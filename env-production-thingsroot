@@ -7,7 +7,7 @@ SITE_NAME=ioe.example.com
 SITES=`ioe.example.com`
 DB_ROOT_USER=root
 ADMIN_PASSWORD=admin
-INSTALL_APPS=wechat,cloud,conf_center,app_center,iot,ioe_api
+INSTALL_APPS=wechat,cloud,conf_center,app_center,iot,ioe_api,iot_chan
 ENTRYPOINT_LABEL=traefik.http.routers.thingsroot-nginx.entrypoints=websecure
 CERT_RESOLVER_LABEL=traefik.http.routers.thingsroot-nginx.tls.certresolver=myresolver
 HTTPS_REDIRECT_RULE_LABEL=traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)

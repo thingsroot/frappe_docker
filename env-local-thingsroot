@@ -7,7 +7,7 @@ SITE_NAME=ioe.localhost
 SITES=`ioe.localhost`
 DB_ROOT_USER=root
 ADMIN_PASSWORD=admin
-INSTALL_APPS=wechat,cloud,conf_center,app_center,iot,ioe_api
+INSTALL_APPS=wechat,cloud,conf_center,app_center,iot,ioe_api,iot_chan
 ENTRYPOINT_LABEL=traefik.http.routers.thingsroot-nginx.entrypoints=web
 CERT_RESOLVER_LABEL=thingsroot.local.no-cert-resolver
 HTTPS_REDIRECT_RULE_LABEL=thingsroot.local.no-redirect-rule
