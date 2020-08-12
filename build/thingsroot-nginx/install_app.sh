@@ -21,6 +21,7 @@ git clone --depth 1 https://github.com/srdgame/frappe_conf_center conf_center ${
 git clone --depth 1 https://github.com/srdgame/frappe_app_center app_center ${BRANCH}
 git clone --depth 1 https://github.com/srdgame/frappe_iot iot ${BRANCH}
 git clone --depth 1 https://github.com/srdgame/frappe_ioe_api ioe_api ${BRANCH}
+git clone --depth 1 https://github.com/srdgame/frappe_iot_chan iot_chan ${BRANCH}
 
 cd /home/frappe/frappe-bench/apps/frappe
 yarn
@@ -30,6 +31,7 @@ yarn production --app conf_center
 yarn production --app app_center
 yarn production --app iot
 yarn production --app ioe_api
+yarn production --app iot_chan
 rm -fr node_modules
 yarn install --production=true
 

@@ -13,4 +13,5 @@ RUN install_app conf_center https://github.com/srdgame/frappe_conf_center ${GIT_
 RUN install_app app_center https://github.com/srdgame/frappe_app_center ${GIT_BRANCH}
 RUN install_app iot https://github.com/srdgame/frappe_iot ${GIT_BRANCH}
 RUN install_app ioe_api https://github.com/srdgame/frappe_ioe_api ${GIT_BRANCH}
+RUN install_app iot_chan https://github.com/srdgame/frappe_iot_chan ${GIT_BRANCH}
 
