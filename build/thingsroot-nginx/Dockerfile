@@ -19,6 +19,7 @@ RUN echo "conf_center" >> /var/www/html/apps.txt
 RUN echo "app_center" >> /var/www/html/apps.txt
 RUN echo "iot" >> /var/www/html/apps.txt
 RUN echo "ioe_api" >> /var/www/html/apps.txt
+RUN echo "iot_chan" >> /var/www/html/apps.txt
 
 VOLUME [ "/assets" ]
 
