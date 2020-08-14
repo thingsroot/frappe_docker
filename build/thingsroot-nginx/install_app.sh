@@ -8,7 +8,7 @@ FRAPPE_BRANCH=${2}
 
 mkdir -p /home/frappe/frappe-bench/sites/assets
 cd /home/frappe/frappe-bench
-echo -e "frappe\nwechat\ncloud\nconf_center\napp_center\niot\nioe_api" > /home/frappe/frappe-bench/sites/apps.txt
+echo -e "frappe\nwechat\ncloud\nconf_center\napp_center\niot\nioe_api\niot_chan" > /home/frappe/frappe-bench/sites/apps.txt
 
 install_packages git
 
@@ -35,13 +35,18 @@ yarn production --app iot_chan
 rm -fr node_modules
 yarn install --production=true
 
+mkdir -p /home/frappe/frappe-bench/sites/assets/cloud
+cp -R /home/frappe/frappe-bench/apps/cloud/cloud/public/* /home/frappe/frappe-bench/sites/assets/cloud
 mkdir -p /home/frappe/frappe-bench/sites/assets/app_center
 cp -R /home/frappe/frappe-bench/apps/app_center/app_center/public/* /home/frappe/frappe-bench/sites/assets/app_center
 mkdir -p /home/frappe/frappe-bench/sites/assets/iot/images
-cp -R /home/frappe/frappe-bench/apps/app_center/app_center/public/images /home/frappe/frappe-bench/sites/assets/iot/images
+mkdir -p /home/frappe/frappe-bench/sites/assets/iot/js
+cp -R /home/frappe/frappe-bench/apps/iot/iot/public/images /home/frappe/frappe-bench/sites/assets/iot/images
+cp /home/frappe/frappe-bench/apps/iot/iot/public/js/setup_wizard.js /home/frappe/frappe-bench/sites/assets/iot/js/
 
 # Add frappe and all the apps available under in frappe-bench here
 echo "rsync -a --delete /var/www/html/assets/frappe /assets" > /rsync
+echo "rsync -a --delete /var/www/html/assets/cloud /assets" >> /rsync
 echo "rsync -a --delete /var/www/html/assets/app_center /assets" >> /rsync
 echo "rsync -a --delete /var/www/html/assets/iot /assets" >> /rsync
 chmod +x /rsync
