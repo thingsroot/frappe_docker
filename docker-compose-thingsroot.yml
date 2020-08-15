@@ -225,6 +225,8 @@ services:
   emqx-thingsroot:
     image: emqx/emqx:latest
     restart: on-failure
+    links:
+      - "thingsroot-python:${SITE_NAME}"
     depends_on:
       - thingsroot-python
     environment:
