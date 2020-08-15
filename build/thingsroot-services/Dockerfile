@@ -10,8 +10,7 @@ WORKDIR /home/frappe/services
 RUN install_packages \
     git \
 	gettext-base \
-	supervisor \
-    && apt-get autoremove -y
+	supervisor
 
 RUN pip3 install --no-cache-dir git+https://github.com/Pithikos/python-websocket-server
 

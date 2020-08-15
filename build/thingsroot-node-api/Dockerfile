@@ -5,7 +5,7 @@ WORKDIR /var/www
 
 RUN mkdir -p /var/www
 
-RUN install_packages git gettext-base && apt-get autoremove -y
+RUN install_packages git gettext-base
 
 ARG GIT_BRANCH=master
 
