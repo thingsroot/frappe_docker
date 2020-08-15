@@ -4,8 +4,6 @@ FROM frappe/frappe-worker:${FRAPPE_BRANCH}
 
 ARG GIT_BRANCH
 
-RUN install_packages libcurl4-openssl-dev
-
 # Our changes fixes (install_app take the APP_NAME)
 COPY build/common/worker/install_app.sh /usr/local/bin/install_app
 
