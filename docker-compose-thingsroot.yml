@@ -194,6 +194,8 @@ services:
   redis-socketio:
     image: redis:latest
     restart: on-failure
+    links:
+      - "thingsroot-python:${SITE_NAME}"
     volumes:
       - redis-socketio-vol:/data
 
