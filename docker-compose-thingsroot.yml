@@ -30,7 +30,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   thingsroot-nginx:
-    image: thingsroot/thingsroot-nginx:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-nginx:${THINGSROOT_VERSION}
     restart: on-failure
     environment:
       - FRAPPE_PY=thingsroot-python
@@ -48,7 +48,7 @@ services:
       - assets-vol:/assets:rw
 
   thingsroot-python:
-    image: thingsroot/thingsroot-worker:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
     restart: on-failure
     environment:
       - MARIADB_HOST=${MARIADB_HOST}
@@ -62,7 +62,7 @@ services:
       - assets-vol:/home/frappe/frappe-bench/sites/assets:rw
 
   thingsroot-services:
-    image: thingsroot/thingsroot-services:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-services:${THINGSROOT_VERSION}
     restart: on-failure
     links:
       - "thingsroot-python:${SITE_NAME}"
@@ -86,7 +86,7 @@ services:
       - thingsroot-services-vol:/var/log/supervisor:rw
 
   thingsroot-node-api:
-    image: thingsroot/thingsroot-node-api:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-node-api:${THINGSROOT_VERSION}
     restart: on-failure
     links:
       - "thingsroot-python:${SITE_NAME}"
@@ -103,7 +103,7 @@ services:
       - REDIS_HOST=redis-thingsroot
 
   thingsroot-web:
-    image: thingsroot/thingsroot-web:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-web:${THINGSROOT_VERSION}
     restart: on-failure
     links:
       - "thingsroot-python:${SITE_NAME}"
@@ -136,7 +136,7 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
 
   thingsroot-worker-default:
-    image: thingsroot/thingsroot-worker:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
     restart: on-failure
     command: worker
     depends_on:
@@ -146,7 +146,7 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
 
   thingsroot-worker-short:
-    image: thingsroot/thingsroot-worker:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
     restart: on-failure
     command: worker
     environment:
@@ -158,7 +158,7 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
 
   thingsroot-worker-long:
-    image: thingsroot/thingsroot-worker:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
     restart: on-failure
     command: worker
     environment:
@@ -170,7 +170,7 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
 
   thingsroot-schedule:
-    image: thingsroot/thingsroot-worker:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
     restart: on-failure
     command: schedule
     depends_on:
@@ -266,7 +266,7 @@ services:
       - mariadb-vol:/var/lib/mysql
 
   site-creator:
-    image: thingsroot/thingsroot-worker:${THINGSROOT_VERSION}
+    image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
     restart: "no"
     command: new
     depends_on:

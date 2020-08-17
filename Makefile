@@ -1,7 +1,7 @@
 # Copyright (c) Dirk Chang <dirk@kooiot.com>
 # SPDX-License-Identifier: Apache-2.0
 
-MF_DOCKER_IMAGE_NAME_PREFIX ?= thingsroot
+MF_DOCKER_IMAGE_NAME_PREFIX ?= kooiot
 BUILD_BRANCH ?= master
 PROJECT_NAME ?= thingsroot
 SERVICES = thingsroot-node-api \

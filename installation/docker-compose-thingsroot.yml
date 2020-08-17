@@ -2,7 +2,7 @@ version: '3'
 
 services:
   thingsroot-nginx:
-    image: thingsroot/thingsroot-nginx:${VERSION}
+    image: kooiot/thingsroot-nginx:${VERSION}
     restart: on-failure
     environment:
       - FRAPPE_PY=thingsroot-python
@@ -29,7 +29,7 @@ services:
       - assets-vol:/assets:rw
 
   thingsroot-python:
-    image: thingsroot/thingsroot-worker:${VERSION}
+    image: kooiot/thingsroot-worker:${VERSION}
     restart: on-failure
     environment:
       - MARIADB_HOST=${MARIADB_HOST}
@@ -53,7 +53,7 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
 
   frappe-worker-default:
-    image: thingsroot/thingsroot-worker:${VERSION}
+    image: kooiot/thingsroot-worker:${VERSION}
     restart: on-failure
     command: worker
     depends_on:
@@ -66,7 +66,7 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
 
   frappe-worker-short:
-    image: thingsroot/thingsroot-worker:${VERSION}
+    image: kooiot/thingsroot-worker:${VERSION}
     restart: on-failure
     command: worker
     environment:
@@ -81,7 +81,7 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
 
   frappe-worker-long:
-    image: thingsroot/thingsroot-worker:${VERSION}
+    image: kooiot/thingsroot-worker:${VERSION}
     restart: on-failure
     command: worker
     environment:
@@ -96,7 +96,7 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
 
   frappe-schedule:
-    image: thingsroot/thingsroot-worker:${VERSION}
+    image: kooiot/thingsroot-worker:${VERSION}
     restart: on-failure
     command: schedule
     depends_on:
