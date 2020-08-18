@@ -91,8 +91,11 @@ release:
 run:
 	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml up
 
+create:
+	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml create
+
 start:
-	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml up -d
+	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml start
 
 stop:
 	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml stop
