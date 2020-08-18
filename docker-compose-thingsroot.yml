@@ -3,6 +3,7 @@ version: "3"
 services:
   traefik:
     image: "traefik:v2.2"
+    restart: on-failure
     command:
       - "--log.level=DEBUG"
       - "--providers.docker=true"
