@@ -61,6 +61,7 @@ services:
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
       - assets-vol:/home/frappe/frappe-bench/sites/assets:rw
+      - backups-vol:/home/frappe/backups:rw
 
   thingsroot-services:
     image: kooiot/thingsroot-services:${THINGSROOT_VERSION}
@@ -145,6 +146,7 @@ services:
       - redis-cache
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - backups-vol:/home/frappe/backups:rw
 
   thingsroot-worker-short:
     image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
@@ -157,6 +159,7 @@ services:
       - redis-cache
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - backups-vol:/home/frappe/backups:rw
 
   thingsroot-worker-long:
     image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
@@ -169,6 +172,7 @@ services:
       - redis-cache
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - backups-vol:/home/frappe/backups:rw
 
   thingsroot-schedule:
     image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
@@ -179,6 +183,7 @@ services:
       - redis-cache
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - backups-vol:/home/frappe/backups:rw
 
   redis-cache:
     image: redis:latest
@@ -255,6 +260,7 @@ services:
     volumes:
       - emqx-thingsroot-data-vol:/opt/emqx/data:rw
       - emqx-thingsroot-etc-vol:/opt/emqx/etc:rw
+      - emqx-thingsroot-lib-vol:/opt/emqx/lib:rw
       - emqx-thingsroot-log-vol:/opt/emqx/log:rw
 
   mariadb:
@@ -280,6 +286,7 @@ services:
       - INSTALL_APPS=${INSTALL_APPS}
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - backups-vol:/home/frappe/backups:rw
 
 volumes:
   mariadb-vol:
@@ -291,8 +298,10 @@ volumes:
   chronograf-thingsroot-vol:
   emqx-thingsroot-data-vol:
   emqx-thingsroot-etc-vol:
+  emqx-thingsroot-lib-vol:
   emqx-thingsroot-log-vol:
   thingsroot-services-vol:
   assets-vol:
   sites-vol:
   cert-vol:
+  backups-vol:
