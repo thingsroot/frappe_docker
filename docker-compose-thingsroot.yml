@@ -3,7 +3,7 @@ version: "3"
 services:
   traefik:
     image: "traefik:v2.2"
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     command:
       - "--log.level=DEBUG"
       - "--providers.docker=true"
@@ -32,7 +32,7 @@ services:
 
   thingsroot-nginx:
     image: kooiot/thingsroot-nginx:${THINGSROOT_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     environment:
       - FRAPPE_PY=thingsroot-python
       - FRAPPE_PY_PORT=8000
@@ -50,7 +50,7 @@ services:
 
   thingsroot-python:
     image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     environment:
       - MARIADB_HOST=${MARIADB_HOST}
       - REDIS_CACHE=redis-cache:6379
@@ -64,7 +64,7 @@ services:
 
   thingsroot-services:
     image: kooiot/thingsroot-services:${THINGSROOT_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     links:
       - "thingsroot-python:${SITE_NAME}"
     depends_on:
@@ -88,7 +88,7 @@ services:
 
   thingsroot-node-api:
     image: kooiot/thingsroot-node-api:${THINGSROOT_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     links:
       - "thingsroot-python:${SITE_NAME}"
     depends_on:
@@ -105,7 +105,7 @@ services:
 
   thingsroot-web:
     image: kooiot/thingsroot-web:${THINGSROOT_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     links:
       - "thingsroot-python:${SITE_NAME}"
     depends_on:
@@ -130,7 +130,7 @@ services:
 
   frappe-socketio:
     image: frappe/frappe-socketio:${FRAPPE_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     depends_on:
       - redis-socketio
     volumes:
@@ -138,7 +138,7 @@ services:
 
   thingsroot-worker-default:
     image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     command: worker
     depends_on:
       - redis-queue
@@ -148,7 +148,7 @@ services:
 
   thingsroot-worker-short:
     image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     command: worker
     environment:
       - WORKER_TYPE=short
@@ -160,7 +160,7 @@ services:
 
   thingsroot-worker-long:
     image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     command: worker
     environment:
       - WORKER_TYPE=long
@@ -172,7 +172,7 @@ services:
 
   thingsroot-schedule:
     image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     command: schedule
     depends_on:
       - redis-queue
@@ -182,19 +182,19 @@ services:
 
   redis-cache:
     image: redis:latest
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     volumes:
       - redis-cache-vol:/data
 
   redis-queue:
     image: redis:latest
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     volumes:
       - redis-queue-vol:/data
 
   redis-socketio:
     image: redis:latest
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     links:
       - "thingsroot-python:${SITE_NAME}"
     volumes:
@@ -202,13 +202,13 @@ services:
 
   redis-thingsroot:
     image: redis:latest
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     volumes:
       - redis-thingsroot-vol:/data
 
   influxdb-thingsroot:
     image: influxdb:latest
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     environment:
       - INFLUXDB_ADMIN_USER=${INFLUXDB_USER}
       - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
@@ -217,7 +217,7 @@ services:
 
   chronograf-thingsroot:
     image: chronograf:latest
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     depends_on:
       - influxdb-thingsroot
     ports:
@@ -227,7 +227,7 @@ services:
 
   emqx-thingsroot:
     image: emqx/emqx:latest
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     links:
       - "thingsroot-python:${SITE_NAME}"
     depends_on:
@@ -259,7 +259,7 @@ services:
 
   mariadb:
     image: mariadb:10.3
-    restart: on-failure
+    restart: ${SERVICES_RESTART}
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:

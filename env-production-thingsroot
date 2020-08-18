@@ -23,3 +23,4 @@ INFLUXDB_PASSWORD=admin
 CLOUD_SITE_NAME=cloud.example.com
 CLOUD_SITES=`cloud.example.com`
 CLOUD_ENTRYPOINT_LABEL=traefik.http.routers.thingsroot-web.entrypoints=websecure
+SERVICES_RESTART=always
