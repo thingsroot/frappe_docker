@@ -90,3 +90,10 @@ release:
 
 run:
 	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml up
+
+start:
+	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml up -d
+
+stop:
+	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml down
+
