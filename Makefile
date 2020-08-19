@@ -100,3 +100,12 @@ stop:
 down:
 	docker-compose --project-name $(PROJECT_NAME) -f docker-compose-thingsroot.yml down
 
+define docker_pull
+	for svc in $(SERVICES); do \
+		docker pull $(MF_DOCKER_IMAGE_NAME_PREFIX)/$$svc:$(1); \
+	done
+endef
+
+pull_latest:
+	$(call docker_pull,latest)
+
