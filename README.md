@@ -1,6 +1,4 @@
-| Develop | [![Build Status](https://travis-ci.com/frappe/frappe_docker.svg?branch=develop)](https://travis-ci.com/frappe/frappe_docker)  |
-|---------|-----------------------------------------------------------------------------------------------------------------------------|
-| Master  | [![Build Status](https://travis-ci.com/frappe/frappe_docker.svg?branch=master)](https://travis-ci.com/frappe/frappe_docker) |
+![Docker Image CI](https://github.com/thingsroot/frappe_docker/workflows/Docker%20Image%20CI/badge.svg)
 
 ## Getting Started
 
