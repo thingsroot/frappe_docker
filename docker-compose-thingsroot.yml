@@ -288,6 +288,13 @@ services:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
       - backups-vol:/home/frappe/backups:rw
 
+  npc-client:
+    image: viccomdong/npc:v1
+    restart: "no"
+    enviroment:
+      - npserver=${NPC_HOST}
+      - npckey=${NPC_AUTH_KEY}
+
 volumes:
   mariadb-vol:
   redis-cache-vol:

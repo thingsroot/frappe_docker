@@ -24,3 +24,5 @@ CLOUD_SITE_NAME=cloud.localhost
 CLOUD_SITES=`cloud.localhost`
 CLOUD_ENTRYPOINT_LABEL=traefik.http.routers.thingsroot-web.entrypoints=web
 SERVICES_RESTART=on-failure
+NPC_HOST=nps.thingsroot.com:7088
+NPC_AUTH_KEY=thingsboard-auth-key
