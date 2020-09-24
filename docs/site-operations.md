@@ -203,3 +203,30 @@ Additional services can be pinged as part of health check with option `-p` or `-
 
 This check ensures that given service should be connected along with services in common_site_config.json.
 If connection to service(s) fails, the command fails with exit code 1.
+
+## Frappe internal commands using bench helper
+
+To execute commands using bench helper.
+
+```shell
+ docker run \
+    -v <project-name>_sites-vol:/home/frappe/frappe-bench/sites \
+    --network <project-name>_default \
+    --user frappe \
+    frappe/frappe-worker:$VERSION bench --help
+```
+
+Example command to clear cache
+
+```shell
+ docker run \
+    -v <project-name>_sites-vol:/home/frappe/frappe-bench/sites \
+    --network <project-name>_default \
+    --user frappe \
+    frappe/frappe-worker:$VERSION bench --site erp.mysite.com clear-cache
+```
+
+Notes:
+
+- Use it to install/uninstall custom apps, add system manager user, etc.
+- To run the command as non root user add the command option `--user frappe`.
