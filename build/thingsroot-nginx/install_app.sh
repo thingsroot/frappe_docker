@@ -10,7 +10,7 @@ mkdir -p /home/frappe/frappe-bench/sites/assets
 cd /home/frappe/frappe-bench
 echo -e "frappe\nwechat\ncloud\nconf_center\napp_center\niot\nioe_api\niot_chan" > /home/frappe/frappe-bench/sites/apps.txt
 
-install_packages git
+install_packages git python2
 
 mkdir -p apps
 cd apps
@@ -34,6 +34,7 @@ yarn production --app ioe_api
 yarn production --app iot_chan
 rm -fr node_modules
 yarn install --production=true
+yarn add node-sass
 
 mkdir -p /home/frappe/frappe-bench/sites/assets/cloud
 cp -R /home/frappe/frappe-bench/apps/cloud/cloud/public/* /home/frappe/frappe-bench/sites/assets/cloud
