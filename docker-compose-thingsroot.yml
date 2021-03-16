@@ -136,6 +136,8 @@ services:
       - redis-socketio
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - logs-vol:/home/frappe/frappe-bench/logs:rw
+      - backups-vol:/home/frappe/backups:rw
 
   thingsroot-worker-default:
     image: kooiot/thingsroot-worker:${THINGSROOT_VERSION}
@@ -146,6 +148,7 @@ services:
       - redis-cache
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - logs-vol:/home/frappe/frappe-bench/logs:rw
       - backups-vol:/home/frappe/backups:rw
 
   thingsroot-worker-short:
@@ -159,6 +162,7 @@ services:
       - redis-cache
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - logs-vol:/home/frappe/frappe-bench/logs:rw
       - backups-vol:/home/frappe/backups:rw
 
   thingsroot-worker-long:
@@ -183,6 +187,7 @@ services:
       - redis-cache
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - logs-vol:/home/frappe/frappe-bench/logs:rw
       - backups-vol:/home/frappe/backups:rw
 
   redis-cache:
@@ -286,6 +291,7 @@ services:
       - INSTALL_APPS=${INSTALL_APPS}
     volumes:
       - sites-vol:/home/frappe/frappe-bench/sites:rw
+      - logs-vol:/home/frappe/frappe-bench/logs:rw
       - backups-vol:/home/frappe/backups:rw
 
   npc-client:
@@ -311,4 +317,5 @@ volumes:
   assets-vol:
   sites-vol:
   cert-vol:
+  logs-vol:
   backups-vol:
