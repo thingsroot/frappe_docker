@@ -7,10 +7,11 @@ ENV PYTHONUNBUFFERED 1
 
 # Install dependencies
 WORKDIR /home/frappe/services
-RUN install_packages \
-    git \
-	gettext-base \
-	supervisor
+
+RUN apt-get update -y && \
+	apt-get install git gettext-base supervisor -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --no-cache-dir git+https://github.com/Pithikos/python-websocket-server
 

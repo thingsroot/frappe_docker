@@ -4,7 +4,10 @@ WORKDIR /var/www/
 
 RUN mkdir -p /var/www
 
-RUN install_packages git
+RUN apt-get update -y && \
+	apt-get install build-essential git python2 -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 ARG GIT_BRANCH=master
 
