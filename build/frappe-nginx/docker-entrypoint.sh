@@ -11,8 +11,6 @@ rsync -a --delete /var/www/html/assets/css /assets
 rsync -a --delete /var/www/html/assets/frappe /assets
 . /rsync
 
-chmod -R 755 /assets
-
 touch /var/www/html/sites/.build -r $(ls -td /assets/* | head -n 1)
 
 if [[ -z "$FRAPPE_PY" ]]; then
@@ -31,12 +29,30 @@ if [[ -z "$SOCKETIO_PORT" ]]; then
     export SOCKETIO_PORT=9000
 fi
 
-envsubst '${API_HOST}
-    ${API_PORT}
-    ${FRAPPE_PY}
+if [[ -z "$HTTP_TIMEOUT" ]]; then
+    export HTTP_TIMEOUT=120
+fi
+
+if [[ -z "$UPSTREAM_REAL_IP_ADDRESS" ]]; then
+    export UPSTREAM_REAL_IP_ADDRESS=127.0.0.1
+fi
+
+if [[ -z "$UPSTREAM_REAL_IP_RECURSIVE" ]]; then
+    export UPSTREAM_REAL_IP_RECURSIVE=off
+fi
+
+if [[ -z "$UPSTREAM_REAL_IP_HEADER" ]]; then
+    export UPSTREAM_REAL_IP_HEADER="X-Forwarded-For"
+fi
+
+envsubst '${FRAPPE_PY}
     ${FRAPPE_PY_PORT}
     ${FRAPPE_SOCKETIO}
-    ${SOCKETIO_PORT}' \
+    ${SOCKETIO_PORT}
+    ${HTTP_TIMEOUT}
+    ${UPSTREAM_REAL_IP_ADDRESS}
+    ${UPSTREAM_REAL_IP_RECURSIVE}
+    ${UPSTREAM_REAL_IP_HEADER}' \
     < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
 
 echo "Waiting for frappe-python to be available on $FRAPPE_PY port $FRAPPE_PY_PORT"

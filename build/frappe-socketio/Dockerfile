@@ -1,4 +1,4 @@
-FROM node:slim
+FROM node:buster-slim
 
 # Add frappe user
 RUN useradd -ms /bin/bash frappe
@@ -27,6 +27,8 @@ RUN cd /home/frappe/frappe-bench/apps/frappe \
 # Setup docker-entrypoint
 COPY build/frappe-socketio/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN ln -s /usr/local/bin/docker-entrypoint.sh / # backwards compat
+
+USER frappe
 
 WORKDIR /home/frappe/frappe-bench/sites
 
