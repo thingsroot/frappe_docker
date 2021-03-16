@@ -290,8 +290,8 @@ services:
 
   npc-client:
     image: viccomdong/npc:v1
-    restart: "no"
-    enviroment:
+    restart: ${SERVICES_RESTART}
+    environment:
       - npserver=${NPC_HOST}
       - npckey=${NPC_AUTH_KEY}
 

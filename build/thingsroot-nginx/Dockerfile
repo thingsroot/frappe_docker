@@ -1,7 +1,6 @@
-ARG NODE_IMAGE_TAG=12-buster-slim
 ARG GIT_BRANCH=master
 ARG FRAPPE_BRANCH=version-12
-FROM bitnami/node:${NODE_IMAGE_TAG}
+FROM node:buster-slim
 
 ARG GIT_BRANCH
 ARG FRAPPE_BRANCH
