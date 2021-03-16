@@ -1,5 +1,4 @@
-ARG NODE_IMAGE_TAG=12-prod
-FROM bitnami/node:${NODE_IMAGE_TAG}
+FROM node:buster-slim
 
 WORKDIR /var/www/
 

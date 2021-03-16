@@ -1,4 +1,4 @@
-FROM bitnami/python:3.7-prod
+FROM python:3.7-slim-buster
 
 RUN useradd -ms /bin/bash frappe
 

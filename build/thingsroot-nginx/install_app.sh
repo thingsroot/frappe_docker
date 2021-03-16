@@ -10,8 +10,6 @@ mkdir -p /home/frappe/frappe-bench/sites/assets
 cd /home/frappe/frappe-bench
 echo -e "frappe\nwechat\ncloud\nconf_center\napp_center\niot\nioe_api\niot_chan" > /home/frappe/frappe-bench/sites/apps.txt
 
-install_packages git python2
-
 mkdir -p apps
 cd apps
 git clone --depth 1 https://github.com/frappe/frappe ${BRANCH_FRP}
@@ -23,8 +21,12 @@ git clone --depth 1 https://github.com/srdgame/frappe_iot iot ${BRANCH}
 git clone --depth 1 https://github.com/srdgame/frappe_ioe_api ioe_api ${BRANCH}
 git clone --depth 1 https://github.com/srdgame/frappe_iot_chan iot_chan ${BRANCH}
 
+
+echo "Install frappe NodeJS dependencies . . ."
 cd /home/frappe/frappe-bench/apps/frappe
 yarn
+echo "Build browser assets . . ."
+cd /home/frappe/frappe-bench/apps/frappe
 yarn production --app wechat
 yarn production --app cloud
 yarn production --app conf_center
@@ -32,9 +34,9 @@ yarn production --app app_center
 yarn production --app iot
 yarn production --app ioe_api
 yarn production --app iot_chan
-rm -fr node_modules
+echo "Install frappe NodeJS production dependencies . . ."
+cd /home/frappe/frappe-bench/apps/frappe
 yarn install --production=true
-yarn add node-sass
 
 mkdir -p /home/frappe/frappe-bench/sites/assets/cloud
 cp -R /home/frappe/frappe-bench/apps/cloud/cloud/public/* /home/frappe/frappe-bench/sites/assets/cloud
