@@ -236,7 +236,7 @@ services:
       - chronograf-thingsroot-vol:/var/lib/chronograf:rw
 
   emqx-thingsroot:
-    image: emqx/emqx:latest
+    image: emqx/emqx:4.2.8
     restart: ${SERVICES_RESTART}
     links:
       - "thingsroot-python:${SITE_NAME}"
